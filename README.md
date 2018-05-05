@@ -6,7 +6,7 @@ Docker container for [jitsi-meet][3]
 
 ## Usage (downloading pre-built image from Docker Hub)
 
-	$ docker run -it --name jitsi-meet -p 443:443 fabriziogaliano/jitsi-meet
+	$ docker run -it --name jitsi-meet -p 80:80 fabriziogaliano/jitsi-meet
 
 ## Accessing the web app:
 
