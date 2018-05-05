@@ -16,7 +16,7 @@ if [ ! -f "$LOG" ]; then
 fi
 
 #Configure custom nginx file (Insecure HTTP), please run behind an SSL Proxy
-rm /etc/nginx/sites-enabled/ok.conf 
+rm /etc/nginx/sites-enabled/ok.conf /etc/nginx/sites-enabled/default
 cp /docker/configurations/nginx/jitsi-meet /etc/nginx/sites-enabled/jitsi-meet.conf
 
 cd /etc/init.d/
