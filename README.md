@@ -14,8 +14,36 @@ After that open up the following address :
 
   - **http://$DOCKER_HOST/**
 
+## Docker compose file example with [traefik][6] label 
 
-## More Info
+```
+version: '2'
+
+networks:
+  default:
+    external:
+      name: private
+
+services:
+   jitsi:
+      image: fabriziogaliano/jitsi-meet:v0.2
+
+      container_name: jitsi
+
+      labels:
+         - 'traefik.enable=true'
+         - 'traefik.docker.network=private'
+
+         - 'traefik.jitsi.backend=meet_domain_it'
+         - 'traefik.jitsi.port=80'
+         - 'traefik.jitsi.protocol=http'
+         - 'traefik.jitsi.frontend.rule=Host:meet.domain.it'
+         - 'traefik.jitsi.frontend.passHostHeader=true'
+         - 'traefik.jitsi.frontend.entryPoints=http,https'
+
+      restart: always
+```
+## More info
 
 About jitsi-meet: [www.jitsi.org][1]
 
@@ -27,3 +55,4 @@ To help improve this container [docker-jitsi-meet][5]
 [3]:https://jitsi.org/
 [4]:http://docs.docker.com
 [5]:https://github.com/fabriziogaliano/docker-jitsi-meet
+[6]:https://github.com/containous/traefik
