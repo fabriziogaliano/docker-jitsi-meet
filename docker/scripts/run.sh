@@ -15,6 +15,10 @@ if [ ! -f "$LOG" ]; then
 	chown jvb:jitsi $LOG
 fi
 
+#Configure custom nginx file (Insecure HTTP), please run behind a SSL Proxy
+rm /etc/nginx/sites-enabled/ok.conf 
+cp /docker/configurations/nginx/jitsi-meet /etc/nginx/sites-enabled/jitsi-meet.conf
+
 cd /etc/init.d/
 
 ./prosody restart && \

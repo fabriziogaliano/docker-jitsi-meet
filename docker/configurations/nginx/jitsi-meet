@@ -1,23 +1,34 @@
 server_names_hash_bucket_size 64;
 
 server {
-    listen 443;
-    # tls configuration that is not covered in this guide
-    # we recommend the use of https://certbot.eff.org/
-    server_name jitsi.example.com;
-    # set the root
+    listen 80;
+    server_name ok;
+
     root /usr/share/jitsi-meet;
-    index index.html;
+    index index.html index.htm;
+    error_page 404 /static/404.html;
+
+    location /config.js {
+        alias /etc/jitsi/meet/ok-config.js;
+    }
+
     location ~ ^/([a-zA-Z0-9=\?]+)$ {
         rewrite ^/(.*)$ / break;
     }
+
     location / {
         ssi on;
     }
+
+    # Backward compatibility
+    location ~ /external_api.* {
+        root /usr/share/jitsi-meet/libs;
+    }
+
     # BOSH
     location /http-bind {
         proxy_pass      http://localhost:5280/http-bind;
         proxy_set_header X-Forwarded-For $remote_addr;
-        proxy_set_header Host :$http_host;
+        proxy_set_header Host $http_host;
     }
 }
