@@ -5,17 +5,17 @@ Docker image for [jitsi-meet][3] based on Debian Stretch
 
 > Jitsi Meet is an open-source (MIT) WebRTC JavaScript application that uses Jitsi Videobridge to provide high quality, scalable video conferences."  "Jitsi Meet allows for very efficient collaboration. It allows users to stream their desktop or only some windows. It also supports shared document editing with Etherpad and remote presentations with Prezi.
 
-## Usage (downloading pre-built image from Docker Hub)
+# Usage (downloading pre-built image from Docker Hub)
 
 	$ docker run -it --name jitsi-meet -p 80:80 fabriziogaliano/jitsi-meet
 
-## Accessing the web app:
+# Accessing the web app:
 
 After that open up the following address :
 
   - **http://$DOCKER_HOST/**
 
-## Docker compose file example with [traefik][6] label 
+# Docker compose file example with [traefik][6] label 
 
 ```
 version: '2'
@@ -36,9 +36,12 @@ services:
          - 'traefik.jitsi.frontend.rule=Host:meet.domain.it'
          - 'traefik.jitsi.frontend.passHostHeader=true'
          - 'traefik.jitsi.frontend.entryPoints=http,https'
+      ports:
+         - "5347:5347"
+         - "10000-10010/udp"
       restart: always
 ```
-## More info
+# More info
 
 About jitsi-meet: [www.jitsi.org][1]
 
