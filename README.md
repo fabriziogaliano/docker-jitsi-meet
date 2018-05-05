@@ -26,4 +26,4 @@ To help improve this container [docker-jitsi-meet][5]
 [2]:https://www.docker.com
 [3]:https://jitsi.org/
 [4]:http://docs.docker.com
-[5]:https://github.com/robertoandrade/docker-jitsi-meet
+[5]:https://github.com/fabriziogaliano/docker-jitsi-meet
