@@ -12,7 +12,7 @@ Docker container for [jitsi-meet][3]
 
 After that open up the following address :
 
-  - **https://$DOCKER_HOST/**
+  - **http://$DOCKER_HOST/**
 
 
 ## More Info
