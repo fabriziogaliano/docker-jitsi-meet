@@ -7,7 +7,7 @@ Docker image for [jitsi-meet][3] based on Debian Stretch
 
 # Usage (downloading pre-built image from Docker Hub)
 
-	$ docker run -it --name jitsi-meet -p 80:80 fabriziogaliano/jitsi-meet
+	$ docker run -it --name jitsi-meet -p 80:80 -p 5347:5347 -p 10000-10010/udp fabriziogaliano/jitsi-meet
 
 # Accessing the web app:
 
