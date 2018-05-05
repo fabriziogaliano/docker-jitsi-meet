@@ -1,7 +1,7 @@
 # docker-jitsi-meet
 
 Docker image for [jitsi-meet][3] based on Debian Stretch
-> ### ---> This image was designed to be used behind an SSL Proxy <--- ###
+> ## ---> This image was designed to be used behind an SSL Proxy, please consider this <--- ##
 
 > Jitsi Meet is an open-source (MIT) WebRTC JavaScript application that uses Jitsi Videobridge to provide high quality, scalable video conferences."  "Jitsi Meet allows for very efficient collaboration. It allows users to stream their desktop or only some windows. It also supports shared document editing with Etherpad and remote presentations with Prezi.
 
