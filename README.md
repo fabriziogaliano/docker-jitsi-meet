@@ -19,29 +19,23 @@ After that open up the following address :
 
 ```
 version: '2'
-
 networks:
   default:
     external:
       name: private
-
 services:
    jitsi:
       image: fabriziogaliano/jitsi-meet:v0.2
-
       container_name: jitsi
-
       labels:
          - 'traefik.enable=true'
          - 'traefik.docker.network=private'
-
          - 'traefik.jitsi.backend=meet_domain_it'
          - 'traefik.jitsi.port=80'
          - 'traefik.jitsi.protocol=http'
          - 'traefik.jitsi.frontend.rule=Host:meet.domain.it'
          - 'traefik.jitsi.frontend.passHostHeader=true'
          - 'traefik.jitsi.frontend.entryPoints=http,https'
-
       restart: always
 ```
 ## More info
