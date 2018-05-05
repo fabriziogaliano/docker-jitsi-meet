@@ -15,6 +15,26 @@ if [ ! -f "$LOG" ]; then
 	chown jvb:jitsi $LOG
 fi
 
+cp /docker/configurations/prosody/meet.example.cfg.lua /etc/prosody/conf.d/meet.example.cfg.lua
+
+for var in $(printenv); do
+
+    #explode vars to retrive key/value pairs
+    IFS='=' read -r -a array <<< $var
+
+    export KEY=${array[0]}
+
+    if [[ $KEY =~ PROSODY_ ]]; then
+
+        export VALUE=${array[1]}
+
+        sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/prosody/conf.d/meet.example.cfg.lua'
+        sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/jitsi/videobridge/config'
+
+    fi
+
+done
+
 #Configure custom nginx file (Insecure HTTP), please run behind an SSL Proxy
 rm /etc/nginx/sites-enabled/ok.conf 
 rm /etc/nginx/sites-enabled/default

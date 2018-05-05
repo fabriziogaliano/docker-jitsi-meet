@@ -5,6 +5,8 @@ MAINTAINER Fabrizio Galiano <fabrizio.galiano@hotmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM xterm
 
+ENV PROSODY_DOMAIN example.it
+
 #Install Prerequisites
 RUN apt-get update && apt-get install -y \
     apt-transport-https \
