@@ -20,6 +20,7 @@ for var in $(printenv); do
         export VALUE=${array[1]}
 
         # sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/prosody/conf.d/meet.${PROSODY}.cfg.lua'
+        # sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/var/lib/dpkg/info/jitsi-meet-prosody.postinst'
         sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/jitsi/videobridge/config'
         sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/jitsi/jicofo/config'
 
