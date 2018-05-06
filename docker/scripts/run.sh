@@ -1,6 +1,12 @@
+#!/bin/bash
+
 unset DEBIAN_FRONTEND
 
-cp /docker/configurations/prosody/meet.example.cfg.lua /etc/prosody/conf.d/meet.example.cfg.lua
+export PROSODY=`printenv | grep PROSODY_DOMAIN | awk -F'=' '{print $2}'`
+
+# cp /docker/configurations/prosody/meet.example.cfg.lua /etc/prosody/conf.d/meet.${PROSODY}.cfg.lua
+cp /docker/configurations/jitsiJicofo/config /etc/jitsi/jicofo/config
+cp /docker/configurations/jitsiVideobridge/config /etc/jitsi/videobridge/config
 
 for var in $(printenv); do
 
@@ -13,8 +19,9 @@ for var in $(printenv); do
 
         export VALUE=${array[1]}
 
-        sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/prosody/conf.d/meet.example.cfg.lua'
+        # sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/prosody/conf.d/meet.${PROSODY}.cfg.lua'
         sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/jitsi/videobridge/config'
+        sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/jitsi/jicofo/config'
 
     fi
 
@@ -26,8 +33,9 @@ if [ ! -f "$LOG" ]; then
 	
 	sed 's/#\ create\(.*\)/echo\ create\1 $JICOFO_AUTH_USER $JICOFO_AUTH_DOMAIN $JICOFO_AUTH_PASSWORD/' -i /var/lib/dpkg/info/jitsi-meet-prosody.postinst
 
-	dpkg-reconfigure jitsi-videobridge
-	rm /etc/jitsi/jicofo/config && dpkg-reconfigure jicofo
+    # /docker/scripts/jitsi-videobridge.cfg.sh
+
+    # rm /etc/jitsi/jicofo/config && dpkg-reconfigure jicofo
 	/var/lib/dpkg/info/jitsi-meet-prosody.postinst configure
 	dpkg-reconfigure jitsi-meet
 
