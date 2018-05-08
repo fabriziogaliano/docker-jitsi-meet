@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TERM xterm
 
 ENV PROSODY_DOMAIN example.it
+ENV JITSI_DOMAIN meet.example.it
 
 #Install Prerequisites
 RUN apt-get update && apt-get install -y \

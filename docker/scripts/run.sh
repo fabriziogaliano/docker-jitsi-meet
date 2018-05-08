@@ -1,10 +1,11 @@
 #!/bin/bash
 
-unset DEBIAN_FRONTEND
+#unset DEBIAN_FRONTEND
 
 export PROSODY=`printenv | grep PROSODY_DOMAIN | awk -F'=' '{print $2}'`
 
-# cp /docker/configurations/prosody/meet.example.cfg.lua /etc/prosody/conf.d/meet.${PROSODY}.cfg.lua
+export PASSWORD_GEN=`cat /dev/urandom | tr -dc 'a-zA-Z0-9!#$%&\()+-.=@_{|}' | fold -w 8 | head -n 1`
+
 cp /docker/configurations/jitsiJicofo/config /etc/jitsi/jicofo/config
 cp /docker/configurations/jitsiVideobridge/config /etc/jitsi/videobridge/config
 
@@ -15,14 +16,15 @@ for var in $(printenv); do
 
     export KEY=${array[0]}
 
-    if [[ $KEY =~ PROSODY_ ]]; then
+    if [[ $KEY =~ PROSODY_|JITSI_|PASSWORD_ ]]; then
 
         export VALUE=${array[1]}
 
-        # sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/prosody/conf.d/meet.${PROSODY}.cfg.lua'
-        # sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/var/lib/dpkg/info/jitsi-meet-prosody.postinst'
         sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/jitsi/videobridge/config'
         sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/jitsi/jicofo/config'
+        sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/docker/scripts/jitsiDebconf.sh'
+        sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/jitsi/jicofo/config'
+        sed -i -e 's|<'$KEY'>|'$VALUE'|g' '/etc/jitsi/videobridge/config'
 
     fi
 
@@ -34,9 +36,10 @@ if [ ! -f "$LOG" ]; then
 	
 	sed 's/#\ create\(.*\)/echo\ create\1 $JICOFO_AUTH_USER $JICOFO_AUTH_DOMAIN $JICOFO_AUTH_PASSWORD/' -i /var/lib/dpkg/info/jitsi-meet-prosody.postinst
 
-    # /docker/scripts/jitsi-videobridge.cfg.sh
-
+    # dpkg-reconfigure jitsi-videobridge
     # rm /etc/jitsi/jicofo/config && dpkg-reconfigure jicofo
+
+    /docker/scripts/jitsiDebconf.sh
 	/var/lib/dpkg/info/jitsi-meet-prosody.postinst configure
 	dpkg-reconfigure jitsi-meet
 
