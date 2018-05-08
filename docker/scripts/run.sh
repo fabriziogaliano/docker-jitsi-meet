@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#unset DEBIAN_FRONTEND
+unset DEBIAN_FRONTEND
 
 export PROSODY=`printenv | grep PROSODY_DOMAIN | awk -F'=' '{print $2}'`
 
