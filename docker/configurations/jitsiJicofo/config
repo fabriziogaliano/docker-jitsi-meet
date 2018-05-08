@@ -1,12 +1,12 @@
 # Jitsi Conference Focus settings
 # sets the host name of the XMPP server
-JICOFO_HOST=localhost
+JICOFO_HOST=meet.<PROSODY_DOMAIN>
 
 # sets the XMPP domain (default: none)
 JICOFO_HOSTNAME=meet.<PROSODY_DOMAIN>
 
 # sets the secret used to authenticate as an XMPP component
-JICOFO_SECRET=H9zV7My8
+JICOFO_SECRET=<PASSWORD_JICOFOSECRET>
 
 # sets the port to use for the XMPP component connection
 JICOFO_PORT=5347
@@ -18,7 +18,7 @@ JICOFO_AUTH_DOMAIN=auth.meet.<PROSODY_DOMAIN>
 JICOFO_AUTH_USER=focus
 
 # sets the password to use for XMPP user logins
-JICOFO_AUTH_PASSWORD=<PASSWORD_GEN>
+JICOFO_AUTH_PASSWORD=<PASSWORD_JICOFOAUTH>
 
 # extra options to pass to the jicofo daemon
 JICOFO_OPTS=""

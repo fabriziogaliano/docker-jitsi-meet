@@ -4,7 +4,9 @@
 
 export PROSODY=`printenv | grep PROSODY_DOMAIN | awk -F'=' '{print $2}'`
 
-export PASSWORD_GEN=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1`
+export PASSWORD_JICOFOSECRET=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1`
+export PASSWORD_JICOFOAUTH=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1`
+export PASSWORD_JVBSECRET=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1`
 
 cp /docker/configurations/jitsiJicofo/config /etc/jitsi/jicofo/config
 cp /docker/configurations/jitsiVideobridge/config /etc/jitsi/videobridge/config
