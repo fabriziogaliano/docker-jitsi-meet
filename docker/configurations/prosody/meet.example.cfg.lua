@@ -13,8 +13,8 @@ VirtualHost "meet.<PROSODY_DOMAIN>"
         -- Note that old-style SSL on port 5223 only supports one certificate, and will always
         -- use the global one.
         -- ssl = {
-        --         key = "/etc/prosody/certs/ok.key";
-        --         certificate = "/etc/prosody/certs/ok.crt";
+        --         key = "/etc/prosody/certs/meet.<PROSODY_DOMAIN>.key";
+        --         certificate = "/etc/prosody/certs/meet.<PROSODY_DOMAIN>.crt";
         -- }
         -- we need bosh
         modules_enabled = {
@@ -25,20 +25,20 @@ VirtualHost "meet.<PROSODY_DOMAIN>"
 
         c2s_require_encryption = false
 
-Component "conference.jitsi.<PROSODY_DOMAIN>" "muc"
+Component "conference.meet.<PROSODY_DOMAIN>" "muc"
     storage = "null"
     --modules_enabled = { "token_verification" }
-admins = { "focus@auth.jitsi.<PROSODY_DOMAIN>" }
+admins = { "focus@auth.meet.<PROSODY_DOMAIN>" }
 
-Component "jitsi-videobridge.jitsi.<PROSODY_DOMAIN>"
-    component_secret = "mPuyfJp5"
+Component "jitsi-videobridge.meet.<PROSODY_DOMAIN>"
+    component_secret = "<PASSWORD_JVBSECRET>"
 
-VirtualHost "auth.jitsi.<PROSODY_DOMAIN>"
+VirtualHost "auth.meet.<PROSODY_DOMAIN>"
     -- ssl = {
-    --     key = "/etc/prosody/certs/auth.ok.key";
-    --     certificate = "/etc/prosody/certs/auth.ok.crt";
+    --     key = "/etc/prosody/certs/auth.meet.<PROSODY_DOMAIN>.key";
+    --     certificate = "/etc/prosody/certs/auth.meet.<PROSODY_DOMAIN>.crt";
     -- }
     authentication = "internal_plain"
 
-Component "focus.jitsi.<PROSODY_DOMAIN>"
-    component_secret = "bpFsZeHO"
+Component "focus.meet.<PROSODY_DOMAIN>"
+    component_secret = "<PASSWORD_JICOFOSECRET>"
