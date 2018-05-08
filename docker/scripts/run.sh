@@ -50,7 +50,7 @@ if [ ! -f "$LOG" ]; then
 fi
 
 # Change configuration of Prosody to be alligned with password auto generated
-cp /docker/configurations/prosody/ /etc/prosody/conf.available/meet.${PROSODY_DOMAIN}.cfg.lua
+cp /docker/configurations/prosody/meet.example.cfg.lua /etc/prosody/conf.available/meet.${PROSODY_DOMAIN}.cfg.lua
 
 for var in $(printenv); do
 
